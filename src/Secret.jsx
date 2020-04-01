@@ -1,23 +1,17 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-export default class Secret extends Component {
-	constructor () {
-		super();
-		this.state = {
-			message : "Loading..."
-		};
-	}
+const Secret = () => {
+	const [ secret, setSecret ] = useState("Loading...");
 
-	componentDidMount () {
-		fetch("/api/secret").then((res) => res.text()).then((res) => this.setState({ message: res }));
-	}
+	useEffect(() => {
+		fetch("/api/secret").then((res) => res.text()).then((res) => setSecret(res));
+	}, []);
+	return (
+		<div>
+			<h1>Secret</h1>
+			<p>{secret}</p>
+		</div>
+	);
+};
 
-	render () {
-		return (
-			<div>
-				<h1>Secret</h1>
-				<p>{this.state.message}</p>
-			</div>
-		);
-	}
-}
+export default Secret;

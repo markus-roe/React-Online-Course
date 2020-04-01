@@ -1,33 +1,39 @@
-import React, { Component } from "react";
+import React, { useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 
-export default class Register extends Component {
-	constructor (props) {
-		super(props);
-		this.state = {
-			email    : "",
-			password : ""
-		};
-	}
+const Register = () => {
+	const history = useHistory();
+	const registerForm = useRef(null);
+	const [ email, setEmail ] = useState("");
+	const [ password, setPassword ] = useState("");
 
-	handleInputChange = (event) => {
-		const { value, name } = event.target;
-		this.setState({
-			[name] : value
-		});
+	const user = {
+		email    : email,
+		password : password
 	};
 
-	onSubmit = (event) => {
+	const handleEmailChange = () => {
+		const form = registerForm.current;
+		setEmail(form["email"].value);
+	};
+
+	const handlePasswordChange = () => {
+		const form = registerForm.current;
+		setPassword(form["password"].value);
+	};
+
+	const onSubmit = (event) => {
 		event.preventDefault();
 		fetch("/api/register", {
 			method  : "POST",
-			body    : JSON.stringify(this.state),
+			body    : JSON.stringify(user),
 			headers : {
 				"Content-Type" : "application/json"
 			}
 		})
 			.then((res) => {
 				if (res.status === 200) {
-					this.props.history.push("/login");
+					history.push("/login");
 				} else {
 					const error = new Error(res.error);
 					throw error;
@@ -39,28 +45,32 @@ export default class Register extends Component {
 			});
 	};
 
-	render () {
-		return (
-			<form onSubmit={this.onSubmit}>
-				<h1>Register Below!</h1>
-				<input
-					type="email"
-					name="email"
-					placeholder="Enter email"
-					value={this.state.email}
-					onChange={this.handleInputChange}
-					required
-				/>
-				<input
-					type="password"
-					name="password"
-					placeholder="Enter password"
-					value={this.state.password}
-					onChange={this.handleInputChange}
-					required
-				/>
-				<input type="submit" value="Submit" />
-			</form>
-		);
-	}
-}
+	return (
+		<form ref={registerForm} onSubmit={onSubmit}>
+			<h1>Register Below!</h1>
+			<input
+				type="email"
+				name="email"
+				placeholder="Enter email"
+				value={email}
+				onChange={() => {
+					handleEmailChange();
+				}}
+				required
+			/>
+			<input
+				type="password"
+				name="password"
+				placeholder="Enter password"
+				value={password}
+				onChange={() => {
+					handlePasswordChange();
+				}}
+				required
+			/>
+			<input type="submit" value="Submit" />
+		</form>
+	);
+};
+
+export default Register;

@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-
-let logOut = () => {
+const Logout = () => {
 	fetch("logout", {
 		method : "get"
 	})
@@ -14,4 +12,4 @@ let logOut = () => {
 		});
 };
 
-export default logOut;
+export default Logout;
