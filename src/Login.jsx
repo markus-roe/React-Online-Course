@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
 	const history = useHistory();
 	const loginForm = useRef(null);
-	const [ email, setEmail ] = useState("");
-	const [ password, setPassword ] = useState("");
+	const [ email, setEmail ] = useState('');
+	const [ password, setPassword ] = useState('');
 
 	const user = {
 		email    : email,
@@ -14,26 +14,26 @@ const Login = () => {
 
 	const handleEmailChange = () => {
 		const form = loginForm.current;
-		setEmail(form["email"].value);
+		setEmail(form['email'].value);
 	};
 
 	const handlePasswordChange = () => {
 		const form = loginForm.current;
-		setPassword(form["password"].value);
+		setPassword(form['password'].value);
 	};
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		fetch("/api/login", {
-			method  : "POST",
+		fetch('/api/login', {
+			method  : 'POST',
 			body    : JSON.stringify(user),
 			headers : {
-				"Content-Type" : "application/json"
+				'Content-Type' : 'application/json'
 			}
 		})
 			.then((res) => {
 				if (res.status === 200) {
-					history.push("/");
+					history.push('/');
 				} else {
 					const error = new Error(res.error);
 					throw error;
@@ -41,7 +41,7 @@ const Login = () => {
 			})
 			.catch((err) => {
 				console.error(err);
-				alert("Error logging in please try again");
+				alert('Error logging in please try again');
 			});
 	};
 

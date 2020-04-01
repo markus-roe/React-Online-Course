@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const Secret = () => {
-	const [ secret, setSecret ] = useState("Loading...");
+	const [ secret, setSecret ] = useState('Loading...');
 
 	useEffect(() => {
-		fetch("/api/secret").then((res) => res.text()).then((res) => setSecret(res));
+		fetch('/api/secret').then((res) => res.text()).then((res) => setSecret(res));
 	}, []);
 	return (
 		<div>

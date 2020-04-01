@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const Home = () => {
-	const [ message, setMessage ] = useState("Loading...");
+	const [ message, setMessage ] = useState('Loading...');
 
 	useEffect(() => {
-		fetch("/api/home").then((res) => res.text()).then((res) => setMessage(res));
+		fetch('/api/home').then((res) => res.text()).then((res) => setMessage(res));
 	}, []);
 
 	return (
