@@ -1,37 +1,17 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
+import Navbar from './Navbar';
 import withAuth from './withAuth';
 import Home from './Home';
 import Secret from './Secret';
 import Register from './Register';
 import Login from './Login';
-import Logout from './Logout';
 import Restricted from './Restricted';
 
 const App = () => {
 	return (
 		<div>
-			<ul>
-				<li>
-					<Link to="/">Home</Link>
-				</li>
-				<li>
-					<Link to="/secret">Secret</Link>
-				</li>
-				<li>
-					<Link to="/login">Login</Link>
-				</li>
-				<li>
-					<Link to="/register">Register</Link>
-				</li>
-				<li>
-					<button onClick={Logout}>Logout</button>
-				</li>
-				<li>
-					<Link to="/restricted">Restricted</Link>
-				</li>
-			</ul>
-
+			<Navbar />
 			<Switch>
 				<Route path="/" exact component={Home} />
 				<Route path="/secret" component={withAuth(Secret)} />

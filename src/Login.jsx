@@ -1,25 +1,29 @@
 import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
+//TODO: Add error message!
+
 const Login = () => {
 	const history = useHistory();
 	const loginForm = useRef(null);
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
+	const [ errorMessage, setErrorMessage ] = useState('');
 
-	const user = {
-		email    : email,
-		password : password
-	};
+	const [ user, setUser ] = useState({
+		email    : '',
+		password : ''
+	});
 
-	const handleEmailChange = () => {
+	const onChange = () => {
 		const form = loginForm.current;
-		setEmail(form['email'].value);
-	};
-
-	const handlePasswordChange = () => {
-		const form = loginForm.current;
-		setPassword(form['password'].value);
+		form['email'].className = 'form-control';
+		form['password'].className = 'form-control';
+		setErrorMessage('');
+		setUser({
+			email    : form['email'].value,
+			password : form['password'].value
+		});
 	};
 
 	const onSubmit = (event) => {
@@ -46,30 +50,46 @@ const Login = () => {
 	};
 
 	return (
-		<form ref={loginForm} onSubmit={onSubmit}>
-			<h1>Login Below!</h1>
-			<input
-				type="email"
-				name="email"
-				placeholder="Enter email"
-				value={email}
-				onChange={() => {
-					handleEmailChange();
-				}}
-				required
-			/>
-			<input
-				type="password"
-				name="password"
-				placeholder="Enter password"
-				value={password}
-				onChange={() => {
-					handlePasswordChange();
-				}}
-				required
-			/>
-			<input type="submit" value="Submit" />
-		</form>
+		<div className="container">
+			<div className="row">
+				<div className="col-md-6 mt-5 mx-auto">
+					<form ref={loginForm} noValidate onSubmit={onSubmit}>
+						<h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+						<div className="form-group">
+							<label htmlFor="email">Email address</label>
+							<input
+								type="email"
+								className="form-control"
+								name="email"
+								placeholder="Enter email"
+								value={user.email}
+								onChange={() => {
+									onChange();
+								}}
+							/>
+						</div>
+						<div className="form-group">
+							<label htmlFor="password">Password</label>
+							<input
+								type="password"
+								className="form-control"
+								name="password"
+								placeholder="Password"
+								value={user.password}
+								onChange={() => {
+									onChange();
+								}}
+							/>
+						</div>
+
+						<button type="submit" className="btn btn-lg btn-primary btn-block">
+							Sign in
+						</button>
+						<div className="errorMessage">{errorMessage}</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	);
 };
 

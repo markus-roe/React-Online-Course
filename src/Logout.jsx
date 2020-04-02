@@ -1,6 +1,7 @@
 const Logout = () => {
 	fetch('logout', {
-		method : 'get'
+		method      : 'get',
+		credentials : 'include'
 	})
 		.then(function (response) {
 			if (response.redirected) {
