@@ -17,7 +17,7 @@ UserSchema.pre('save', function (next) {
 				next(err);
 			} else {
 				document.password = hashedPassword;
-				document.role = 'admin';
+				document.role = 'user';
 				next();
 			}
 		});
