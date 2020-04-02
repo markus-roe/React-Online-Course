@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
 	Player,
 	ControlBar,
@@ -11,8 +11,6 @@ import {
 import 'video-react/dist/video-react.css'; // import css
 
 const Secret = () => {
-	const [ secret, setSecret ] = useState('Loading...');
-
 	useEffect(() => {}, []);
 	return (
 		<div>

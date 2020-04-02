@@ -1,9 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, Form, NavDropdown, Button } from 'react-bootstrap';
 import Logout from './Logout';
-import cookie from 'react-cookies';
 // import { LinkContainer } from 'react-router-bootstrap';
 // import jwt_decode from 'jwt-decode';
 

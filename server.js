@@ -35,10 +35,6 @@ app.get('/api/home', function (req, res) {
 	res.send('Welcome!');
 });
 
-app.get('/api/secret', withAuth, function (req, res) {
-	res.send('The password is potato');
-});
-
 app.post('/api/register', function (req, res) {
 	const { email, password } = req.body;
 	const user = new User({ email, password });
@@ -81,7 +77,8 @@ app.post('/api/login', function (req, res) {
 					});
 				} else {
 					// Issue token
-					const payload = { email };
+					uid = user.uid;
+					const payload = { uid };
 					const token = jwt.sign(payload, secret, {
 						expiresIn : '1h'
 					});

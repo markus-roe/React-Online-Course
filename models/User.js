@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const generateUID = () => {
+	return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+};
+
 const saltRounds = 10;
 
 const UserSchema = new mongoose.Schema({
 	email    : { type: String, required: true, unique: true },
 	password : { type: String, required: true },
-	role     : { type: String, required: false }
+	role     : { type: String, required: false },
+	uid      : { type: String, required: false }
 });
 
 UserSchema.pre('save', function (next) {
@@ -18,6 +23,7 @@ UserSchema.pre('save', function (next) {
 			} else {
 				document.password = hashedPassword;
 				document.role = 'user';
+				document.uid = generateUID();
 				next();
 			}
 		});
