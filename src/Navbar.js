@@ -54,15 +54,15 @@ const NavBar = () => {
 		<Navbar bg="primary" variant="dark">
 			<Navbar.Brand>B2 Online Kurs</Navbar.Brand>
 			<Nav className="mr-auto">
-				<Link to="/" className="nav-link">
+				<a href="/" className="nav-link">
 					Home
-				</Link>
-				<Link to="/secret" className="nav-link">
+				</a>
+				<a href="/secret" className="nav-link">
 					Secret
-				</Link>
-				<Link to="/restricted" className="nav-link">
+				</a>
+				<a href="/restricted" className="nav-link">
 					Restricted
-				</Link>
+				</a>
 			</Nav>
 
 			<Form>

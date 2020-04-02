@@ -92,7 +92,7 @@ app.post('/api/login', function (req, res) {
 	});
 });
 
-app.get('/checkToken', withAuth, function (req, res) {
+app.post('/checkToken', withAuth, function (req, res) {
 	res.sendStatus(200);
 });
 
