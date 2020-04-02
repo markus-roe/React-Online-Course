@@ -15,6 +15,7 @@ more to be added...
 02.04.2020
 - role based access
 - video functionality based on video-react.js
+- added user id to cookie instead of email
 
 01.04.2020
 - User login
