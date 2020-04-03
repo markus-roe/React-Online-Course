@@ -16,6 +16,7 @@ const withAuth = function (req, res, next) {
 				res.send(401).send({ message: 'Unauthorized: Invalid token' });
 			} else {
 				//check if user has needed rights to access site
+				const uid = decoded.uid;
 				User.findOne({ uid }, function (err, user) {
 					let canAccess = false;
 					for (role of roles) {

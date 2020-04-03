@@ -8,14 +8,18 @@
 		"cookie-parser": "^1.4.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
+		"js-cookie": "^2.2.1",
 		"jsonwebtoken": "^8.5.1",
+		"jwt-decode": "^2.2.0",
 		"mongoose": "^5.9.7",
 		"react": "^16.13.1",
 		"react-bootstrap": "^1.0.0",
 		"react-cookies": "^0.1.1",
 		"react-dom": "^16.13.1",
+		"react-redux": "^7.2.0",
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "^3.4.1",
+		"redux": "^4.0.5",
 		"video-react": "^0.14.1"
 	},
 	"scripts": {
@@ -23,7 +27,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject",
-		"server": "node server.js",
+		"server": "nodemon server.js",
 		"server-dev": "nodemon server.js"
 	},
 	"proxy": "http://localhost:8080",

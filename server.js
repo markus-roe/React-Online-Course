@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const withAuth = require('./middleware');
+const getCurrentUserData = require('./getCurrentUserData');
 require('dotenv').config();
 
 const app = express();
@@ -36,8 +37,8 @@ app.get('/api/home', function (req, res) {
 });
 
 app.post('/api/register', function (req, res) {
-	const { email, password } = req.body;
-	const user = new User({ email, password });
+	const { firstName, lastName, email, password } = req.body;
+	const user = new User({ firstName, lastName, email, password });
 	user.save(function (err) {
 		if (err) {
 			console.log(err);
@@ -82,7 +83,15 @@ app.post('/api/login', function (req, res) {
 					const token = jwt.sign(payload, secret, {
 						expiresIn : '1h'
 					});
-					res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+
+					currentUser = {
+						email     : user.email,
+						firstName : user.firstName,
+						lastName  : user.lastName,
+						role      : user.role
+					};
+					res.cookie('token', token, { httpOnly: false });
+					res.send(currentUser);
 				}
 			});
 		}
@@ -91,6 +100,22 @@ app.post('/api/login', function (req, res) {
 
 app.post('/checkToken', withAuth, function (req, res) {
 	res.sendStatus(200);
+});
+
+app.post('/getCurrentUserData', function (req, res) {
+	const uid = req.body.uid;
+	User.findOne({ uid }, function (err, user) {
+		currentUser = {
+			email : user.email,
+			role  : user.role
+		};
+
+		if (user) {
+			res.send(currentUser);
+		} else {
+			res.send('no user');
+		}
+	});
 });
 
 app.listen(process.env.PORT || 8080);

@@ -8,13 +8,16 @@ const generateUID = () => {
 const saltRounds = 10;
 
 const UserSchema = new mongoose.Schema({
-	email    : { type: String, required: true, unique: true },
-	password : { type: String, required: true },
-	role     : { type: String, required: false },
-	uid      : { type: String, required: false }
+	firstName : { type: String, required: true },
+	lastName  : { type: String, required: true },
+	email     : { type: String, required: true, unique: true },
+	password  : { type: String, required: true },
+	role      : { type: String, required: false },
+	uid       : { type: String, required: false }
 });
 
 UserSchema.pre('save', function (next) {
+	console.log(this);
 	if (this.isNew || this.isModified('password')) {
 		const document = this;
 		bcrypt.hash(this.password, saltRounds, function (err, hashedPassword) {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 //TODO: Add error message!
@@ -6,8 +6,6 @@ import { useHistory } from 'react-router-dom';
 const Login = () => {
 	const history = useHistory();
 	const loginForm = useRef(null);
-	const [ email, setEmail ] = useState('');
-	const [ password, setPassword ] = useState('');
 	const [ errorMessage, setErrorMessage ] = useState('');
 
 	const [ user, setUser ] = useState({
@@ -36,18 +34,23 @@ const Login = () => {
 			}
 		})
 			.then((res) => {
-				if (res.status === 200) {
-					history.push('/');
-				} else {
+				if (res.status !== 200) {
 					const error = new Error(res.error);
 					throw error;
 				}
+				return res.json();
+			})
+			.then((res) => {
+				history.push('/');
 			})
 			.catch((err) => {
 				console.error(err);
-				alert('Error logging in please try again');
+				console.log('Error logging in please try again!!!');
 			});
 	};
+
+	// .then((res) => res.json())
+	// .then((res) => console.log(res))
 
 	return (
 		<div className="container">

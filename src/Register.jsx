@@ -5,16 +5,16 @@ const Register = () => {
 	const history = useHistory();
 	const registerForm = useRef(null);
 	const [ email, setEmail ] = useState('');
-	const [ user, setUser ] = useState({ first_name: '', last_name: '', email: '', password: '', errors: {} });
+	const [ user, setUser ] = useState({ fistName: '', lastName: '', email: '', password: '', errors: {} });
 
 	const onChange = () => {
 		const form = registerForm.current;
 
 		setUser({
-			first_name : form['first_name'].value,
-			last_name  : form['last_name'].value,
-			email      : form['email'].value,
-			password   : form['password'].value
+			firstName : form['firstName'].value,
+			lastName  : form['lastName'].value,
+			email     : form['email'].value,
+			password  : form['password'].value
 		});
 	};
 
@@ -52,9 +52,9 @@ const Register = () => {
 							<input
 								type="text"
 								className="form-control"
-								name="first_name"
+								name="firstName"
 								placeholder="Enter your first name"
-								value={user.first_name}
+								value={user.firstName}
 								onChange={() => {
 									onChange();
 								}}
@@ -65,9 +65,9 @@ const Register = () => {
 							<input
 								type="text"
 								className="form-control"
-								name="last_name"
+								name="lastName"
 								placeholder="Enter your last name"
-								value={user.last_name}
+								value={user.lastName}
 								onChange={() => {
 									onChange();
 								}}

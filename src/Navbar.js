@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, Form, NavDropdown, Button } from 'react-bootstrap';
 import Logout from './Logout';
+import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
+
 // import { LinkContainer } from 'react-router-bootstrap';
 // import jwt_decode from 'jwt-decode';
 
 const NavBar = () => {
-	// let name = '';
-	// if (localStorage.usertoken) {
-	// 	const token = localStorage.usertoken;
-	// 	const decoded = jwt_decode(token);
-	// 	name = decoded.first_name + ' ' + decoded.last_name;
-	// }
+	const [ isLoggedIn, setLoggedIn ] = useState(false);
+
+	if (isLoggedIn) {
+		Cookies.get('token');
+		const cookie = jwt_decode(Cookies.get('token'));
+		const uid = { uid: cookie.uid };
+	}
+
+	// useEffect(() => {
+	// 	fetch('/getCurrentUserData', {
+	// 		method  : 'POST',
+	// 		body    : JSON.stringify(uid),
+	// 		headers : {
+	// 			'Content-Type' : 'application/json'
+	// 		}
+	// 	})
+	// 		.then((res) => res.text())
+	// 		.then((res) => console.log(res));
+	// }, []);
 
 	const loginRegLogout = (
 		<ul className="navbar-nav">
@@ -52,9 +68,12 @@ const NavBar = () => {
 		<Navbar bg="primary" variant="dark">
 			<Navbar.Brand>B2 Online Kurs</Navbar.Brand>
 			<Nav className="mr-auto">
-				<a href="/" className="nav-link">
+				<Link to="/" className="nav-link">
 					Home
-				</a>
+				</Link>
+				<Link to="/About" className="nav-link">
+					About
+				</Link>
 				<a href="/secret" className="nav-link">
 					Secret
 				</a>
