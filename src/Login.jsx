@@ -1,4 +1,5 @@
 import React, { useState, useRef, useContext } from 'react';
+import './Login.css';
 import { useHistory } from 'react-router-dom';
 
 //TODO: Add error message!
@@ -44,13 +45,12 @@ const Login = () => {
 				history.push('/');
 			})
 			.catch((err) => {
-				console.error(err);
-				console.log('Error logging in please try again!!!');
+				const form = loginForm.current;
+				form['email'].className += ' text-danger is-invalid';
+				form['password'].className += ' text-danger is-invalid';
+				setErrorMessage('Invalid email or password!');
 			});
 	};
-
-	// .then((res) => res.json())
-	// .then((res) => console.log(res))
 
 	return (
 		<div className="container">

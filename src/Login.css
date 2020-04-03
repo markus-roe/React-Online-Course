@@ -1,0 +1,11 @@
+.errorMessage {
+	font-size: 20px;
+	font-weight: 300;
+	text-align: center;
+	margin: 20px;
+	color: red;
+}
+
+.form-control {
+	background-image: none !important;
+}
