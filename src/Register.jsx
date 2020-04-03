@@ -4,15 +4,14 @@ import { useHistory } from 'react-router-dom';
 const Register = () => {
 	const history = useHistory();
 	const registerForm = useRef(null);
-	const [ email, setEmail ] = useState('');
-	const [ user, setUser ] = useState({ fistName: '', lastName: '', email: '', password: '', errors: {} });
+	const [ user, setUser ] = useState({ firstName: '', lastName: '', email: '', password: '', errors: {} });
 
 	const onChange = () => {
 		const form = registerForm.current;
 
 		setUser({
-			firstName : form['firstName'].value,
-			lastName  : form['lastName'].value,
+			firstName : form['first_name'].value,
+			lastName  : form['last_name'].value,
 			email     : form['email'].value,
 			password  : form['password'].value
 		});
@@ -52,7 +51,7 @@ const Register = () => {
 							<input
 								type="text"
 								className="form-control"
-								name="firstName"
+								name="first_name"
 								placeholder="Enter your first name"
 								value={user.firstName}
 								onChange={() => {
@@ -65,7 +64,7 @@ const Register = () => {
 							<input
 								type="text"
 								className="form-control"
-								name="lastName"
+								name="last_name"
 								placeholder="Enter your last name"
 								value={user.lastName}
 								onChange={() => {
